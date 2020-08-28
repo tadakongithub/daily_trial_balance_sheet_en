@@ -6,6 +6,8 @@ if(!$_SESSION['admin_logged_in']) {
     header('Location: index.php');
 }
 
+require 'lang.php';
+
 ?>
 
 <html>
@@ -15,11 +17,11 @@ if(!$_SESSION['admin_logged_in']) {
 
 <body class="flex-body">
     <div class="ui pointing stackable menu">
-        <a class="item" href="admin-pass.php">店舗パス変更</a>
-        <a class="item" href="list.php">ダウンロード</a>
-        <a class="item" href="add_branch.php">店舗追加</a>
+        <a class="item" href="admin-pass.php"><?php checkLang('Change Branch Password', '店舗パス変更'); ?></a>
+        <a class="item" href="list.php"><?php checkLang('Download', 'ダウンロード'); ?></a>
+        <a class="item" href="add_branch.php"><?php checkLang('Add Branch', '店舗追加'); ?></a>
         <div class="right menu">
-            <a class="ui item" href="admin-logout.php">ログアウト</a>
+            <a class="ui item" href="admin-logout.php"><?php checkLang('Log Out', 'ログアウト'); ?></a>
         </div>
     </div>
 </body>

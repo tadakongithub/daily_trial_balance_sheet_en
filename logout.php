@@ -2,6 +2,8 @@
 
 session_start();
 
+require 'lang.php';
+
 session_destroy();
 
 ?>
@@ -12,8 +14,8 @@ session_destroy();
 </head>
 <body  class="flex-body">
     <div class="home-container">
-    <div class="success-message">ログアウトしました</div>
-    <a href="login.php" class="back_to_top">ログインする</a>
+    <div class="success-message"><?php checkLang('Logged Out', 'ログアウトしました');?></div>
+    <a href="login.php" class="back_to_top"><?php checkLang('Log In', 'ログインする');?></a>
     </div>
 </body>
 </html>

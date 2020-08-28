@@ -12,4 +12,17 @@ function checkLang($eng, $jp) {
     }
     echo $message;
 }
+
+function returnLang($eng, $jp) {
+    global $lang;
+    switch ($lang) {
+        case 'eng':
+            $message = $eng;
+        break;
+        case 'jp':
+            $message = $jp;
+        break;
+    }
+    return $message;
+}
 ?>

@@ -1,6 +1,7 @@
 <?php
 
 require 'db.php';
+require 'lang.php';
 
 
 if($_POST) {
@@ -12,7 +13,8 @@ if($_POST) {
     ));
     $matchedArray = $statement->fetchAll();
     if(count($matchedArray) === 0) {
-        echo '<p style="font-size: 3rem;">選択した月のデータが見つかりませんでした。</p>';
+        $noDataFound = $lang === 'eng' ? '<p style="font-size: 3rem;">No Data were found for the branch and the month you selected.</p>' : '<p style="font-size: 3rem;">選択した月のデータが見つかりませんでした。</p>';
+        echo $noDataFound;
         return;
     }
 }
@@ -43,27 +45,27 @@ for($i = 0; $i < count($matchedArray); $i++) {
 
     //1 ~ 5行目
     $activeSheet
-    ->setCellValue('J1', '記入者')
+    ->setCellValue('J1', returnLang('User Name', '記入者'))
     ->setCellValue('K1', $record['name'])
-    ->setCellValue('A2', '日付')
+    ->setCellValue('A2', returnLang('Date', '日付'))
     ->mergeCells('C2:C2')
     ->setCellValue('B2', $record['date'])
-    ->setCellValue('J3', '店舗名')
+    ->setCellValue('J3', returnLang('Branch', '店舗名'))
     ->setCellValue('K3', $_POST['branch'])
-    ->setCellValue('A4', 'つり銭')
+    ->setCellValue('A4', returnLang('Change', 'つり銭'))
     ->mergeCells('A4:C4')
     ->mergeCells('D4:G4')
     ->setCellValue('D4', $record['change1'])
     ->mergeCells('H4:M4')
-    ->setCellValue('H4', '内訳')
+    ->setCellValue('H4', returnLang('Breakdown', '内訳'))
     ->mergeCells('A5:C5')
-    ->setCellValue('A5', '現金売上')
+    ->setCellValue('A5', returnLang('Cash Sale', '現金売上'))
     ->mergeCells('D5:G5')
     ->setCellValue('D5', $record['earning'])
     ->mergeCells('H5:J5')
-    ->setCellValue('H5', '取引・購入先名')
+    ->setCellValue('H5', returnLang('Clients', '取引・購入先名'))
     ->mergeCells('K5:M5')
-    ->setCellValue('K5', '明細')
+    ->setCellValue('K5', returnLang('Items & Services', '明細'))
     ;
 
     //1 ~ 2行目スタイル
@@ -110,11 +112,11 @@ for($i = 0; $i < count($matchedArray); $i++) {
     if($received_count >= 5) {
         $activeSheet
         ->mergeCells("A6:A".(5+$received_count))
-        ->setCellValue('A6', '入金');
+        ->setCellValue('A6', returnLang('Received', '入金'));
     } else if($received_count < 5) {
         $activeSheet
         ->mergeCells("A6:A10")
-        ->setCellValue('A6', '入金');
+        ->setCellValue('A6', returnLang('Received', '入金'));
     }
 
     $activeSheet
@@ -167,11 +169,11 @@ for($i = 0; $i < count($matchedArray); $i++) {
         if($sent_count >= 10) {
             $activeSheet
             ->mergeCells("A".(6+$final_received_num).":A".(6+$final_received_num+$sent_count-1))
-            ->setCellValue('A'.(6+$received_count), '出金');
+            ->setCellValue('A'.(6+$received_count), returnLang('Spent', '出金'));
         } else if($sent_count < 10) {
             $activeSheet
             ->mergeCells("A".(6+$final_received_num).":A".(6+$final_received_num+9))
-            ->setCellValue('A'.(6+$final_received_num), '出金');
+            ->setCellValue('A'.(6+$final_received_num), returnLang('Spent', '出金'));
         }
     
         $activeSheet
@@ -267,12 +269,12 @@ for($i = 0; $i < count($matchedArray); $i++) {
         ->mergeCells('A'.$jissen.':C'.$jissen)
         ->mergeCells('A'.$tsuri.':C'.$tsuri)
         ->mergeCells('A'.$azuke.':C'.$azuke)
-        ->setCellValue('A'.$shiharai, '支払計')
-        ->setCellValue('A'.$reji, 'レジ残計')
-        ->setCellValue('A'.$genkin, '現金過不足')
-        ->setCellValue('A'.$jissen, '実残合計')
-        ->setCellValue('A'.$tsuri, '翌日つり銭')
-        ->setCellValue('A'.$azuke, '翌日預け入れ')
+        ->setCellValue('A'.$shiharai, returnLang('Total Spent', '支払計'))
+        ->setCellValue('A'.$reji, returnLang('Total Balance at Cashier', 'レジ残計'))
+        ->setCellValue('A'.$genkin, returnLang('Deficiency & Excess', '現金過不足'))
+        ->setCellValue('A'.$jissen, returnLang('Actual Total Balance', '実残合計'))
+        ->setCellValue('A'.$tsuri, returnLang('Next Day Change', '翌日つり銭'))
+        ->setCellValue('A'.$azuke, returnLang('Next Day Deposit', '翌日預け入れ'))
         ->setCellValue('D'.$shiharai, $sent_sum)
         ->setCellValue('D'.$reji, $reji_zan)
         ->setCellValue('D'.$genkin, $kabusoku)
@@ -290,12 +292,12 @@ for($i = 0; $i < count($matchedArray); $i++) {
         ->mergeCells('D'.$tsuri.':G'.$tsuri)
         ->mergeCells('D'.$azuke.':G'.$azuke)
 
-        ->setCellValue('J'.$shiharai, '本部記入欄')
+        ->setCellValue('J'.$shiharai, returnLang('For Front Office', '本部記入欄'))
         ->setCellValue('J'.$reji, '8%')
         ->setCellValue('J'.$genkin, '10%')
-        ->setCellValue('J'.$jissen, '計')
-        ->setCellValue('J'.$tsuri, 'クーポン計')
-        ->setCellValue('J'.$azuke, 'クーポン差額')
+        ->setCellValue('J'.$jissen, returnLang('Total', '計'))
+        ->setCellValue('J'.$tsuri, returnLang('Coupon Total', 'クーポン計'))
+        ->setCellValue('J'.$azuke, returnLang('Coupon Margin', 'クーポン差額'))
 
         ->mergeCells('K'.$shiharai.':M'.$shiharai)
         ->mergeCells('K'.$reji.':M'.$reji)
@@ -358,36 +360,36 @@ for($i = 0; $i < count($matchedArray); $i++) {
         ->mergeCells('B'.$ticketRow2.':E'.$ticketRow2)
         ->mergeCells('F'.$ticketRow2.':I'.$ticketRow2)
         ->mergeCells('J'.$ticketRow2.':M'.$ticketRow2)
-        ->setCellValue('A'.$ticketRow1, '※食事券計は、ジャーナルの食事券計と合致すること。')
-        ->setCellValue('H'.$ticketRow1, '食事券計(その他含む')
+        ->setCellValue('A'.$ticketRow1, returnLang('The sum of meal tickets includes journal\'s meal tickets.', '※食事券計は、ジャーナルの食事券計と合致すること。'))
+        ->setCellValue('H'.$ticketRow1, returnLang('Total (Others Included)', '食事券計(その他含む)'))
         ->setCellValue('J'.$ticketRow1, $shokuji_total)
-        ->setCellValue('M'.$ticketRow1, '円')
-        ->setCellValue('B'.$ticketRow2, 'プレミアム食事券')
-        ->setCellValue('F'.$ticketRow2, '販売用回収')
-        ->setCellValue('J'.$ticketRow2, 'サービス用回収')
-        ->setCellValue('A'.$ticketRow3, '千円券')
+        ->setCellValue('M'.$ticketRow1, returnLang('', '円'))
+        ->setCellValue('B'.$ticketRow2, returnLang('Premium', 'プレミアム食事券'))
+        ->setCellValue('F'.$ticketRow2, returnLang('For Sale', '販売用回収'))
+        ->setCellValue('J'.$ticketRow2, returnLang('For Service', 'サービス用回収'))
+        ->setCellValue('A'.$ticketRow3, returnLang('1000 Yen', '千円券'))
         ->setCellValue('B'.$ticketRow3, $record['prem_count'])
-        ->setCellValue('C'.$ticketRow3, '枚')
+        ->setCellValue('C'.$ticketRow3, returnLang('', '枚'))
         ->setCellValue('D'.$ticketRow3, $record['prem_total'])
-        ->setCellValue('E'.$ticketRow3, '円')
+        ->setCellValue('E'.$ticketRow3, returnLang('', '円'))
         ->setCellValue('F'.$ticketRow3, $record['for_selling_count'])
-        ->setCellValue('G'.$ticketRow3, '枚')
+        ->setCellValue('G'.$ticketRow3, returnLang('', '枚'))
         ->setCellValue('H'.$ticketRow3, $record['for_selling_total'])
-        ->setCellValue('I'.$ticketRow3, '円')
+        ->setCellValue('I'.$ticketRow3, returnLang('', '円'))
         ->setCellValue('J'.$ticketRow3, $record['thousand_count'])
-        ->setCellValue('K'.$ticketRow3, '枚')
+        ->setCellValue('K'.$ticketRow3, returnLang('', '枚'))
         ->setCellValue('L'.$ticketRow3, $record['thousand_total'])
-        ->setCellValue('M'.$ticketRow3, '円')
+        ->setCellValue('M'.$ticketRow3, returnLang('', '円'))
         ->setCellValue('J'.$ticketRow4, $record['five_count'])
-        ->setCellValue('K'.$ticketRow4, '枚')
+        ->setCellValue('K'.$ticketRow4, returnLang('', '枚'))
         ->setCellValue('L'.$ticketRow4, $record['five_total'])
-        ->setCellValue('M'.$ticketRow4, '円')
+        ->setCellValue('M'.$ticketRow4, returnLang('', '円'))
         ->setCellValue('J'.$ticketRow5, $record['two_count'])
-        ->setCellValue('K'.$ticketRow5, '枚')
+        ->setCellValue('K'.$ticketRow5, returnLang('', '枚'))
         ->setCellValue('L'.$ticketRow5, $record['two_total'])
-        ->setCellValue('M'.$ticketRow5, '円')
-        ->setCellValue('A'.$ticketRow4, '500円')
-        ->setCellValue('A'.$ticketRow5, '200円');
+        ->setCellValue('M'.$ticketRow5, returnLang('', '円'))
+        ->setCellValue('A'.$ticketRow4, returnLang('500 Yen', '500円'))
+        ->setCellValue('A'.$ticketRow5, returnLang('200 Yen', '200円'));
     
     //食事券スタイル
     $styleArray = [
@@ -457,7 +459,7 @@ for($i = 0; $i < count($matchedArray); $i++) {
 
     //その他食事券
     $other_service_row1 = $ticketRow5 + 2;
-    $activeSheet->setCellValue('A'.$other_service_row1, 'その他');
+    $activeSheet->setCellValue('A'.$other_service_row1, returnLang('Other Meal Tickets', 'その他'));
         $other_name = unserialize($record['other_name']);
         $other_count = unserialize($record['other_count']);
         $other_how_much = unserialize($record['other_how_much']);
@@ -466,9 +468,9 @@ for($i = 0; $i < count($matchedArray); $i++) {
             $activeSheet
                 ->setCellValue('A'.$current_other_service_row, $other_name[$j])
                 ->setCellValue('B'.$current_other_service_row, $other_count[$j])
-                ->setCellValue('C'.$current_other_service_row, '枚')
+                ->setCellValue('C'.$current_other_service_row, returnLang('', '枚'))
                 ->setCellValue('D'.$current_other_service_row, $other_how_much[$j])
-                ->setCellValue('E'.$current_other_service_row, '円');
+                ->setCellValue('E'.$current_other_service_row, returnLang('', '円'));
         }
     
     if($record['other_name']){
@@ -488,14 +490,14 @@ for($i = 0; $i < count($matchedArray); $i++) {
 
     $activeSheet
         ->mergeCells('A'.$urikakeRow1.':B'.$urikakeRow1)
-        ->setCellValue('A'.$urikakeRow1, '売掛金');
+        ->setCellValue('A'.$urikakeRow1, returnLang('Accounts Receivable-Trade', '売掛金'));
 
         for($j = 0; $j < $urikake_count; $j++) {
             $activeSheet
                 ->mergeCells('C'.($urikakeRow1+$j).':D'.($urikakeRow1+$j))
-                ->setCellValue('C'.($urikakeRow1+$j), $client_name_array[$j].'様')
+                ->setCellValue('C'.($urikakeRow1+$j), $client_name_array[$j].returnLang('', '様'))
                 ->mergeCells('E'.($urikakeRow1+$j).':F'.($urikakeRow1+$j))
-                ->setCellValue('E'.($urikakeRow1+$j), $urikake_total_array[$j].'円');
+                ->setCellValue('E'.($urikakeRow1+$j), $urikake_total_array[$j].returnLang('', '円'));
         }
 
     //DC,JCBの値を配列に戻す
@@ -512,17 +514,17 @@ for($i = 0; $i < count($matchedArray); $i++) {
         ->mergeCells('G'.$dcRow1.':H'.$dcRow1)
         ->mergeCells('K'.$dcRow1.':L'.$dcRow1)
 
-        ->setCellValue('A'.$dcRow1, 'DC売上内訳')
-        ->setCellValue('G'.$dcRow1, 'JCB売上内訳');
+        ->setCellValue('A'.$dcRow1, returnLang('DC Sales Breakdown', 'DC売上内訳'))
+        ->setCellValue('G'.$dcRow1, returnLang('JCB Sales Breakdown', 'JCB売上内訳'));
 
         for($j = 0; $j < $dc_count; $j++) {
             if($j == 0) {
                 $activeSheet
-                ->setCellValue('E'.($dcRow1+$j), $dc_how_much[$j].'円');
+                ->setCellValue('E'.($dcRow1+$j), $dc_how_much[$j].returnLang('', '円'));
             } else {
                 $activeSheet
                     ->mergeCells('E'.($dcRow1+$j).':F'.($dcRow1+$j))
-                    ->setCellValue('E'.($dcRow1+$j), $dc_how_much[$j].'円');
+                    ->setCellValue('E'.($dcRow1+$j), $dc_how_much[$j].returnLang('', '円'));
             }
             
         }
@@ -530,11 +532,11 @@ for($i = 0; $i < count($matchedArray); $i++) {
         for($j = 0; $j < $jcb_count; $j++) {
             if($j == 0) {
                 $activeSheet
-                ->setCellValue('K'.($dcRow1+$j), $jcb_how_much[$j].'円');
+                ->setCellValue('K'.($dcRow1+$j), $jcb_how_much[$j].returnLang('', '円'));
             } else {
                 $activeSheet
                     ->mergeCells('K'.($dcRow1+$j).':L'.($dcRow1+$j))
-                    ->setCellValue('K'.($dcRow1+$j), $jcb_how_much[$j].'円');
+                    ->setCellValue('K'.($dcRow1+$j), $jcb_how_much[$j].returnLang('', '円'));
             }
         }
 
@@ -554,12 +556,12 @@ for($i = 0; $i < count($matchedArray); $i++) {
         ->mergeCells('I'.$dc_jcb_total_row.':J'.$dc_jcb_total_row)
         ->mergeCells('K'.$dc_jcb_total_row.':L'.$dc_jcb_total_row)
 
-        ->setCellValue('A'.$dc_jcb_total_row, 'DC売上合計')
-        ->setCellValue('C'.$dc_jcb_total_row, $dc_count.'件')
-        ->setCellValue('E'.$dc_jcb_total_row, array_sum($dc_how_much).'円')
-        ->setCellvalue('G'.$dc_jcb_total_row, 'JCB売上合計')
-        ->setCellValue('I'.$dc_jcb_total_row, $jcb_count.'件')
-        ->setCellValue('K'.$dc_jcb_total_row, array_sum($jcb_how_much).'円');
+        ->setCellValue('A'.$dc_jcb_total_row, returnLang('DC Sales Total', 'DC売上合計'))
+        ->setCellValue('C'.$dc_jcb_total_row, $dc_count.returnLang('', '件'))
+        ->setCellValue('E'.$dc_jcb_total_row, array_sum($dc_how_much).returnLang('', '円'))
+        ->setCellvalue('G'.$dc_jcb_total_row, returnLang('JCB Sales Total', 'JCB売上合計'))
+        ->setCellValue('I'.$dc_jcb_total_row, $jcb_count.returnLang('', '件'))
+        ->setCellValue('K'.$dc_jcb_total_row, array_sum($jcb_how_much).returnLang('', '円'));
 
     //paypay
     $paypayRow = $dc_jcb_total_row + 3;
@@ -568,9 +570,9 @@ for($i = 0; $i < count($matchedArray); $i++) {
         ->mergeCells('A'.$paypayRow.':B'.$paypayRow)
         ->mergeCells('C'.$paypayRow.':D'.$paypayRow)
         ->mergeCells('E'.$paypayRow.':F'.$paypayRow)
-        ->setCellValue('A'.$paypayRow, 'PAYPAY売上合計')
-        ->setCellValue('C'.$paypayRow, $record['paypay_count'].'件')
-        ->setCellValue('E'.$paypayRow, $record['paypay_total'].'円');
+        ->setCellValue('A'.$paypayRow, returnLang('PAYPAY Sales Total', 'PAYPAY売上合計'))
+        ->setCellValue('C'.$paypayRow, $record['paypay_count'].returnLang('', '件'))
+        ->setCellValue('E'.$paypayRow, $record['paypay_total'].returnLang('', '円'));
 
     //others
     $othersRow1 = $paypayRow + 3;
@@ -611,20 +613,20 @@ for($i = 0; $i < count($matchedArray); $i++) {
         ->mergeCells('I'.$othersRow5.':J'.$othersRow5)
         ->mergeCells('K'.$othersRow5.':L'.$othersRow5)
         ->setCellValue('A'.$othersRow1, 'nanaco')
-        ->setCellValue('C'.$othersRow1, $record['nanaco_count'].'件')
-        ->setCellValue('E'.$othersRow1, $record['nanaco_total'].'円')
+        ->setCellValue('C'.$othersRow1, $record['nanaco_count'].returnLang('', '件'))
+        ->setCellValue('E'.$othersRow1, $record['nanaco_total'].returnLang('', '円'))
         ->setCellValue('A'.$othersRow2, 'edy')
-        ->setCellValue('C'.$othersRow2, $record['edy_count'].'件')
-        ->setCellValue('E'.$othersRow2, $record['edy_total'].'円')
-        ->setCellValue('A'.$othersRow3, '交通IC')
-        ->setCellValue('C'.$othersRow3, $record['transport_ic_count'].'件')
-        ->setCellValue('E'.$othersRow3, $record['transport_ic_total'].'円')
+        ->setCellValue('C'.$othersRow2, $record['edy_count'].returnLang('', '件'))
+        ->setCellValue('E'.$othersRow2, $record['edy_total'].returnLang('', '円'))
+        ->setCellValue('A'.$othersRow3, returnLang('Transportation IC', '交通IC'))
+        ->setCellValue('C'.$othersRow3, $record['transport_ic_count'].returnLang('', '件'))
+        ->setCellValue('E'.$othersRow3, $record['transport_ic_total'].returnLang('', '円'))
         ->setCellValue('A'.$othersRow4, 'Quick Pay')
-        ->setCellValue('C'.$othersRow4, $record['quick_pay_count'].'件')
-        ->setCellValue('E'.$othersRow4, $record['quick_pay_total'].'円')
+        ->setCellValue('C'.$othersRow4, $record['quick_pay_count'].returnLang('', '件'))
+        ->setCellValue('E'.$othersRow4, $record['quick_pay_total'].returnLang('', '円'))
         ->setCellValue('A'.$othersRow5, 'WAON')
-        ->setCellValue('C'.$othersRow5, $record['waon_count'].'件')
-        ->setCellValue('E'.$othersRow5, $record['waon_total'].'円');
+        ->setCellValue('C'.$othersRow5, $record['waon_count'].returnLang('', '件'))
+        ->setCellValue('E'.$othersRow5, $record['waon_total'].returnLang('', '円'));
     
     //他の電子マネー
     $other_e_money_name = unserialize($record['other_e_money_name']);
@@ -642,8 +644,8 @@ for($i = 0; $i < count($matchedArray); $i++) {
                 ->mergeCells('I'.$row.':J'.$row)
                 ->mergeCells('K'.$row.':L'.$row)
                 ->setCellValue('A'.$row, $other_e_money_name[$j])
-                ->setCellValue('C'.$row, $other_e_money_count[$j].'件')
-                ->setCellValue('E'.$row, $other_e_money_amount[$j].'円');
+                ->setCellValue('C'.$row, $other_e_money_count[$j].returnLang('', '件'))
+                ->setCellValue('E'.$row, $other_e_money_amount[$j].returnLang('', '円'));
         }
     }
 
@@ -660,7 +662,7 @@ for($i = 0; $i < count($matchedArray); $i++) {
     $activeSheet
         ->mergeCells('A'.$noteTitleRow.':C'.$noteTitleRow)
         ->mergeCells('A'.$noteRow.':L'.($noteRow+4))
-        ->setCellValue('A'.$noteTitleRow, 'メモ、伝達事項：');
+        ->setCellValue('A'.$noteTitleRow, returnLang('Notes, Info to Share', 'メモ、伝達事項：'));
 
     //メモらんスタイル
     $styleArray = [
