@@ -396,7 +396,7 @@
                 </tr>
 
                 <tr class="table-2-row-3">
-                    <td class="item_name"><?php checkLang('$1,000 Tickets', '千円券');?></td>
+                    <td class="item_name word-break"><?php checkLang('$1,000', '千円券');?></td>
                     <td><?php echo $_SESSION['prem_count'];?><?php if($lang === 'jp') echo '円';?></td>
                     <td class="number_cell"><?php echo number_format($_SESSION['prem_total']);?><?php if($lang === 'jp') echo '円';?></td>
                     <td><?php echo $_SESSION['for_selling_count'];?><?php if($lang === 'jp') echo '円';?></td>
@@ -406,7 +406,7 @@
                 </tr>
 
                 <tr class="table-2-row-4">
-                    <td class="item_name"><?php checkLang('$500 Tickets', '500円券');?></td>
+                    <td class="item_name word-break"><?php checkLang('$500', '500円券');?></td>
                     <td class="null"></td>
                     <td class="null"></td>
                     <td class="null"></td>
@@ -416,7 +416,7 @@
                 </tr>
 
                 <tr class="table-2-row-5">
-                    <td class="item_name"><?php checkLang('$200 Tickets', '200円券');?></td>
+                    <td class="item_name word-break"><?php checkLang('$200', '200円券');?></td>
                     <td class="null"></td>
                     <td class="null"></td>
                     <td class="null"></td>
@@ -749,7 +749,7 @@
                     <?php endfor ;?>
                 <?php endif; ?>
                 </div>
-                <div><button class="add-other-service"><?php checkLang('Add Other Meal Ticket', 'その他食事券を追加');?></button></div>
+                <div><button class="add-other-service"><?php checkLang('Add', 'その他食事券を追加');?></button></div>
                 <input type="hidden" value=<?php echo true;?> name="from_edit_form">
                 <input type="hidden" value=<?php echo true;?> name="second_modal">
                 <button class="ui button" type="submit"><?php checkLang('Save Changes', '編集を完了');?></button>

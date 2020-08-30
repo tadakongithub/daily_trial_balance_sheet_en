@@ -42,7 +42,7 @@
         <form action="" method="post" class="ui form">
         
             <div class="each-ticket">
-                <h2 class="ui header">9. <?php checkLang('Premiem Meal Tickets', 'プレミアム食事券の枚数と金額を入力してください');?></h2>
+                <h2 class="ui header">9. <?php checkLang('Premium Meal Tickets', 'プレミアム食事券の枚数と金額を入力してください');?></h2>
 
                 <div class="field">
                     <label for="prem_count"><?php checkLang('How Many', '枚数');?></label>
@@ -75,19 +75,19 @@
                 <h2 class="ui header">11. <?php checkLang('Service Tickets', 'サービス用回収の種類、枚数、金額を入力してください。');?></h2>
 
                 <div class="field">
-                    <label for="thousand_count"><?php checkLang('How Many $10 tickets', '1000円券枚数');?></label>
+                    <label for="thousand_count"><?php checkLang('$10 Ticket (How Many)', '1000円券枚数');?></label>
                     <input type="number" name="thousand_count" id="thousand_count" 
                     value="<?php echo $_SESSION['thousand_count'];?>" placeholder="<?php checkLang('0 if No Transaction', '取引なしは0');?>" required>
                 </div>
                    
                 <div class="field">
-                    <label for="five_count"><?php checkLang('How Many $5 tickets', '500円券枚数');?></label>
+                    <label for="five_count"><?php checkLang('$5 Ticket (How Many)', '500円券枚数');?></label>
                     <input type="number" name="five_count" id="five_count" 
                     value="<?php echo $_SESSION['five_count'];?>"placeholder="<?php checkLang('0 if No Transaction', '取引なしは0');?>" required>
                 </div>
                    
                 <div class="field">
-                    <label for="two_count"><?php checkLang('How Many $2 tickets', '200円券枚数');?></label>
+                    <label for="two_count"><?php checkLang('$2 Ticket (How Many)', '200円券枚数');?></label>
                     <input type="number" name="two_count" id="two_count"
                     value="<?php echo $_SESSION['two_count'];?>" placeholder="<?php checkLang('0 if No Transaction', '取引なしは0');?>" required>
                 </div>   

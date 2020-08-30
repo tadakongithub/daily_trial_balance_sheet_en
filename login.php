@@ -58,6 +58,36 @@
         </form>
 </div>
 
+<!-- modal -->
+<div class="ui basic modal">
+  <!-- <div class="ui icon header">
+    <i class="archive icon"></i>
+    Archive Old Messages
+  </div> -->
+  <div class="content">
+    <p>This app is a demo app showcasing my work. To see how this app would run, log in with the following info:</p>
+    <ul>
+        <li>Oakland Branch: 0000</li>
+        <li>Admin: 0000</li>
+    </ul>
+  </div>
+  <div class="actions">
+    <!-- <div class="ui red basic cancel inverted button">
+      <i class="remove icon"></i>
+      No
+    </div> -->
+    <div class="ui green ok inverted button">
+      <i class="checkmark icon"></i>
+      OK
+    </div>
+  </div>
+</div>
+
+<script>
+    $(window).on('load', function() {
+        $('.ui.basic.modal').modal('show');
+    });
+</script>
 <script src="semantic-ui-pulldown.js"></script>
 </body>
 </html>

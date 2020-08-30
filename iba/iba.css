@@ -2,6 +2,7 @@
 body{
     max-width: 1000px;
     margin: auto;
+    font-family: 'Roboto', sans-serif;
 }
 
 button.submit-btn{
@@ -77,6 +78,7 @@ button.submit-btn{
   -moz-border-radius: .28571429rem;
   -o-border-radius: .28571429rem;
   cursor: pointer;
+  font-family: 'Roboto', sans-serif !important;
 }
 
 
@@ -153,7 +155,7 @@ button.submit-btn{
 }
 
 .each-card{
-    margin: 15px auto;
+    margin: 30px auto;
 }
 
 .each-ticket{
@@ -407,6 +409,7 @@ form.ui.form button[type=submit]{
     color: #fff;
     font-size: 40px;
     cursor: pointer;
+    font-family: 'Roboto', sans-serif;
 }
 
 .back_button:hover{
@@ -424,6 +427,7 @@ form.ui.form button[type=submit]{
     color: #fff;
     font-size: 40px;
     cursor: pointer;
+    font-family: 'Roboto', sans-serif;
 }
 
 .next_button:hover{
@@ -440,6 +444,7 @@ form.ui.form button[type=submit]{
     background: #fff;
     border: none;
     cursor: pointer;
+    font-family: 'Roboto', sans-serif;
 }
 
 .date_btn_container{
@@ -490,6 +495,7 @@ form.ui.form .field input{
 
 h2.ui.header{
     font-size: 30px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .warning{
@@ -500,6 +506,7 @@ h2.ui.header{
 h3.ui.header{
     font-size: 25px;
     line-height: 1.5;
+    font-family: 'Roboto', sans-serif !important;
 }
 
 .back_to_q16, .back_to_date{
@@ -531,6 +538,26 @@ h3.ui.header{
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.others_container{
+    margin: 50px auto;
+}
+
+h1.ui.header{
+    font-family: 'Roboto', sans-serif;
+}
+
+button.ui.button{
+    font-family: 'Roboto', sans-serif !important;
+}
+
+label{
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.word-break{
+    overflow-wrap: break-word;
 }
 
 

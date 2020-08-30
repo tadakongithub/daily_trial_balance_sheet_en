@@ -75,7 +75,7 @@
                 <?php endfor ;?>
                 <?php else :?>
                     <div class="field">
-                    <label for="dc_how_much"><?php checkLang('Payment', '金額');?></label>
+                    <label for="dc_how_much"><?php checkLang('Payment Amount', '金額');?></label>
                     <input type="number" name="dc_how_much[]" id="dc_how_much" 
                     value="<?php echo $_SESSION['dc_how_much'][$i];?>" placeholder="<?php checkLang('Blank If No Transaction', '取引なしは入力しない');?>">
                 </div>
@@ -101,7 +101,7 @@
                 <?php endfor ;?>
                 <?php else :?>
                     <div class="field">
-                    <label for="jcb_how_much"><?php checkLang('Payment', '金額');?></label>
+                    <label for="jcb_how_much"><?php checkLang('Payment Amount', '金額');?></label>
                     <input type="number" name="jcb_how_much[]" id="jcb_how_much"
                     value="<?php echo $_SESSION['jcb_how_much'][$i];?>" placeholder="<?php checkLang('Blank If No Transaction', '取引なしは入力しない');?>">
                 </div>
@@ -120,7 +120,7 @@
                     value="<?php echo $_SESSION['paypay_count'];?>" id="paypay_count" required>
                 </div>
                 <div class="field">
-                    <label for="paypay_total"><?php checkLang('Total Payment', '総額');?></label>
+                    <label for="paypay_total"><?php checkLang('Payment Total', '総額');?></label>
                     <input type="number" name="paypay_total" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>"
                     value="<?php echo $_SESSION['paypay_total'];?>" id="paypay_total" required>
                 </div>
@@ -129,56 +129,64 @@
             <div class="others_container each-card">
                 <h2 class="ui header">15. <?php checkLang('Other EC CARD', 'その他');?></h2>
 
-                <div class="field">
-                    <label for="nanaco_count"><?php checkLang('How Many Nanaco Transactions', 'nanaco 件数');?></label>
-                    <input type="number" name="nanaco_count" value="<?php echo $_SESSION['nanaco_count'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" id="nanaco_count" required>
-                </div>
-                <div class="field">
-                    <label for="nanaco_total"><?php checkLang('Nanaco Total Payment', 'nanaco 金額');?></label>
-                    <input type="number" name="nanaco_total" value="<?php echo $_SESSION['nanaco_total'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" id="nanaco_total" required>
+                <div class="each-card">
+                    <div class="field">
+                        <label for="nanaco_count"><?php checkLang('Nanaco (How Many)', 'nanaco 件数');?></label>
+                        <input type="number" name="nanaco_count" value="<?php echo $_SESSION['nanaco_count'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" id="nanaco_count" required>
+                    </div>
+                    <div class="field">
+                        <label for="nanaco_total"><?php checkLang('Nanaco (Payment Total)', 'nanaco 金額');?></label>
+                        <input type="number" name="nanaco_total" value="<?php echo $_SESSION['nanaco_total'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" id="nanaco_total" required>
+                    </div>
                 </div>
 
-
-                <div class="field">
-                    <label for="edy_count"><?php checkLang('How Many Edy Transactions', 'Edy 件数');?></label>
-                    <input type="number" name="edy_count" value="<?php echo $_SESSION['edy_count'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" id="edy_count" required>
-                </div>
-                <div class="field">
-                    <label for="edy_total"><?php checkLang('Edy Total Payment', 'Edy 金額');?></label>
-                    <input type="number" name="edy_total" value="<?php echo $_SESSION['edy_total'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" id="edy_total" required>
+                <div class="each-card">
+                    <div class="field">
+                        <label for="edy_count"><?php checkLang('Edy (How Many)', 'Edy 件数');?></label>
+                        <input type="number" name="edy_count" value="<?php echo $_SESSION['edy_count'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" id="edy_count" required>
+                    </div>
+                    <div class="field">
+                        <label for="edy_total"><?php checkLang('Edy (Payment Total)', 'Edy 金額');?></label>
+                        <input type="number" name="edy_total" value="<?php echo $_SESSION['edy_total'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" id="edy_total" required>
+                    </div>
                 </div>
                 
-
-                <div class="field">
-                    <label for="transport_ic_count"><?php checkLang('How Many Transport IC Transactions', '交通IC 件数');?></label>
-                    <input type="number" name="transport_ic_count" value="<?php echo $_SESSION['transport_ic_count'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" required>
-                </div>
-                <div class="field">
-                    <label for="transport_ic_total"><?php checkLang('Transport IC Total Payment', '交通IC 金額');?></label>
-                    <input type="number" name="transport_ic_total" value="<?php echo $_SESSION['transport_ic_total'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" required>
-                </div>
-
-                <div class="field">
-                    <label for="quick_pay_count"><?php checkLang('How Many Quick Pay Transactions', 'Quick Pay 件数');?></label>
-                    <input type="number" name="quick_pay_count" value="<?php echo $_SESSION['quick_pay_count'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" required>
-                </div>
-                <div class="field">
-                    <label for="quick_pay_total"><?php checkLang('Quick Pay Total Payment', 'Quick Pay 金額');?></label>
-                    <input type="number" name="quick_pay_total" value="<?php echo $_SESSION['quick_pay_total'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" required>
+                <div class="each-card">
+                    <div class="field">
+                        <label for="transport_ic_count"><?php checkLang('Transport IC (How Many)', '交通IC 件数');?></label>
+                        <input type="number" name="transport_ic_count" value="<?php echo $_SESSION['transport_ic_count'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" required>
+                    </div>
+                    <div class="field">
+                        <label for="transport_ic_total"><?php checkLang('Transport IC (Payment Total)', '交通IC 金額');?></label>
+                        <input type="number" name="transport_ic_total" value="<?php echo $_SESSION['transport_ic_total'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" required>
+                    </div>
                 </div>
 
-                <div class="field">
-                    <label for="waon_count"><?php checkLang('How Many WAON Transactions', 'WAON 件数');?></label>
-                    <input type="number" name="waon_count" value="<?php echo $_SESSION['waon_count'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" required>
+                <div class="each-card">
+                    <div class="field">
+                        <label for="quick_pay_count"><?php checkLang('Quick Pay (How Many)', 'Quick Pay 件数');?></label>
+                        <input type="number" name="quick_pay_count" value="<?php echo $_SESSION['quick_pay_count'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" required>
+                    </div>
+                    <div class="field">
+                        <label for="quick_pay_total"><?php checkLang('Quick Pay (Payment Total)', 'Quick Pay 金額');?></label>
+                        <input type="number" name="quick_pay_total" value="<?php echo $_SESSION['quick_pay_total'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" required>
+                    </div>
                 </div>
-                <div class="field">
-                    <label for="waon_total"><?php checkLang('WAON Total Payment', 'WAON 金額');?></label>
-                    <input type="number" name="waon_total" value="<?php echo $_SESSION['waon_total'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" required>
+
+                <div class="each-card">
+                    <div class="field">
+                        <label for="waon_count"><?php checkLang('WAON (How Many)', 'WAON 件数');?></label>
+                        <input type="number" name="waon_count" value="<?php echo $_SESSION['waon_count'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" required>
+                    </div>
+                    <div class="field">
+                        <label for="waon_total"><?php checkLang('WAON (Payment Total)', 'WAON 金額');?></label>
+                        <input type="number" name="waon_total" value="<?php echo $_SESSION['waon_total'];?>" placeholder="<?php checkLang('0 If No Transaction', '取引なしは0');?>" required>
+                    </div>
                 </div>
 
                 <?php if(isset($_SESSION['other_e_money_name'])) :?>
                     <?php for($i = 0; $i < count($_SESSION['other_e_money_name']); $i++):?>
-                        <div>
+                        <div class="each-card">
                             <div class="field">
                                 <label for="other_e_money_name" id="label-with-remove-button">
                                     <span><?php checkLang('E Money Name', '電子マネー名');?></span>
@@ -191,7 +199,7 @@
                                 <input type="number" id="other_e_money_count" name="other_e_money_count[]" value="<?php echo $_SESSION['other_e_money_count'][$i];?>" required>
                             </div>
                             <div class="field">
-                                <label for="other_e_money_amount"><?php checkLang('Total Payment', '金額');?></label>
+                                <label for="other_e_money_amount"><?php checkLang('Payment Total', '金額');?></label>
                                 <input type="number" id="other_e_money_amount" name="other_e_money_amount[]" value="<?php echo $_SESSION['other_e_money_amount'][$i];?>" required>
                             </div>
                         </div>
@@ -287,7 +295,7 @@
 
             $(add_button).click(function(){
                 $(wrapper).append(
-                    `<div>
+                    `<div class="each-card">
                         <div class="field">
                             <label for="other_e_money_name" id="label-with-remove-button">
                                 <span>${eMoney}</span>
